@@ -1,0 +1,130 @@
+<div data-shadowdom="false" class="dasboard-cards">
+    <div class="card KPI-dashcards">
+        <div class="card-header pb-0">
+            <h4 class="card-title mb-4 cardtitle_{{axp_cardsid}}">{{cardname}}</h4>
+            <div class="card-toolbar">
+                <a href="#" data-bs-toggle="tooltip" class=" " onclick="LoadIframe('processflow.aspx?dashboard=t');">
+                    <span class="material-icons material-icons-style material-icons-2">
+                        open_in_new
+                    </span>
+                </a>
+                <a href="#" data-bs-toggle="tooltip" class=" d-none">
+                    <span class="material-icons material-icons-style material-icons-2">
+                        fullscreen
+                    </span>
+                </a>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="placeholder-content">
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+            </div>
+            <div class="row" id="KPI_CardsList_Wrapper_{{axp_cardsid}}">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            //Enable this code once you have datasource ready.
+            //columns needed from datasource ->name,value,link
+
+            /*
+            var dsObj = new EntityCommon();
+            var data = dsObj.getCardData(`{{cardname}}`);            
+            */
+
+            //Following is a sample json.
+
+            var data = [
+                {
+                    "name": "Sales",
+                    "value": "4.34 M",
+                    "link": "iitmsals()"
+                },
+                {
+                    "name": "Pending Sales Order",
+                    "value": "73",
+                    "link": "iivsor()"
+                },
+                {
+                    "name": "Receivables",
+                    "value": "11.84 M",
+                    "link": "iaccrecv()"
+                },
+                {
+                    "name": "Sales Returns",
+                    "value": "560,172",
+                    "link": "isalrtrp()"
+                }
+            ]
+
+            let generatedMenuOptionHTML = '';
+            data.forEach((rowData, index) => {
+                const moreOption = rowData.moreoption;
+                var stransid = rowData.stransid;
+                const rowCount = index;
+                rowData.rowCount = rowCount;
+
+                generatedMenuOptionHTML +=
+                    `<div class=" widgetWrapper kpiWrapper " card-index="0">
+                        <div class="card rounded-1 shadow-sm h-100 cardbg-${(index % 6) + 1}">
+                            <!--begin::Card content wrapper-->
+                            <div class="card-content-wrapper d-flex align-items-center">
+                                <div class="card-title d-flex ">
+
+                                    <div class="d-none mainIcon w-100--- me-2">
+                                        <img alt="Icon" src="" class="mh-35px mw-35px">
+                                    </div>
+
+                                    <div class="symbol symbol-35px me-2 mainIcon">
+                                        <div class="symbol-label cardbg-inverse-${(index % 6) + 1}">
+                                            <div class="Invoice-icon" style="display: flex;">
+                                                <span class="material-icons material-icons-style material-icons-2">bar_chart</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Kpi-content">
+                                        <span class="Kpi-caption mainHeading">${rowData.name}</span>
+                                        <a href="#" onclick="navigateToUrl('${rowData.link}')">${rowData.value}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            <!-- Card Toolbar -->
+                            <div class="card-toolbar d-flex justify-content-end d-none">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-flex btn-light-primary cardbg-3">
+                                    <statuscontent></statuscontent>
+                                </a>
+                            </div>
+
+                            <!-- Card Footer -->
+                            <div class="card-footer border-0 d-none">
+                                <div class="fs-7 fw-normal text-muted">
+                                    <footercontent></footercontent>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            document.querySelector(`#KPI_CardsList_Wrapper_{{axp_cardsid}}`).innerHTML = generatedMenuOptionHTML;
+            $("#KPI_CardsList_Wrapper_{{axp_cardsid}}").parent().find(".placeholder-content").addClass("d-none")
+            document.querySelector(".cardtitle_{{axp_cardsid}}").innerHTML = `{{cardname}}`;
+
+        }, 1)
+
+    </script>
+</div>

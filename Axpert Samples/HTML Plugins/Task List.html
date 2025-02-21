@@ -1,0 +1,274 @@
+<div data-shadowdom="false" class="dasboard-cards">
+    <div class="card active-list-wrapper">
+        <div class="card-header pb-0">
+            <h4 class="card-title mb-4">{{cardname}}</h4>
+            <div class="card-toolbar">
+                <a href="#" data-bs-toggle="tooltip" class=" " onclick="LoadIframe('processflow.aspx?activelist=t');">
+                    <span class="material-icons material-icons-style material-icons-2">
+                        open_in_new
+                    </span>
+                </a>
+            </div>
+
+        </div>
+        <div class="card-body" id="ActiveListcardbody_{{axp_cardsid}}">
+            <div class="placeholder-content">
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function () {
+            //Enable this code once you have datasource ready.
+            //columns needed from datasource ->fromuser,taskname,eventdatetime,displaytitle,displaycontent,tasktype,rectype,msgtype,taskstatus,cstatus
+
+            /*
+            var dsObj = new EntityCommon();
+            var data = dsObj.getCardData(`{{cardname}}`);            
+            */
+
+            //Following is a sample json.
+            var data = [
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": "rapid import - yyclm",
+                    "eventdatetime": "06/02/2025 18:25:28",
+                    "displaytitle": "Status of Data Import Initiated by You",
+                    "displaycontent": "yyclm=Total Records:2, Inserted:2, Updated:0, Failed:0",
+                    "tasktype": "rapid import",
+                    "rectype": "MSG",
+                    "msgtype": "rapid import",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                },
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": null,
+                    "eventdatetime": "06/02/2025 12:11:34",
+                    "displaytitle": "New Purchase Order - Purchase Order- 09HQ/2024/PO/000085",
+                    "displaycontent": "New Purchase Order has been created- Purchase Order- 09HQ/2024/PO/000085",
+                    "tasktype": null,
+                    "rectype": "MSG",
+                    "msgtype": "Form Notification",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                },
+                {
+                    "touser": null,
+                    "fromuser": "admin",
+                    "taskname": "Make - Purchase Order",
+                    "eventdatetime": "06/02/2025 12:11:17",
+                    "displaytitle": "09HQ/2024/PO/000085",
+                    "displaycontent": "09HQ/2024/PO/000085\r\n",
+                    "tasktype": "Make",
+                    "rectype": "PEG",
+                    "msgtype": "NA",
+                    "taskstatus": "made",
+                    "cstatus": "Completed"
+                },
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": null,
+                    "eventdatetime": "06/02/2025 12:10:19",
+                    "displaytitle": "New Purchase Order - Purchase Order- 09HQ/2024/PO/000085",
+                    "displaycontent": "New Purchase Order has been created- Purchase Order- 09HQ/2024/PO/000085",
+                    "tasktype": null,
+                    "rectype": "MSG",
+                    "msgtype": "Form Notification",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                },
+                {
+                    "touser": null,
+                    "fromuser": "admin",
+                    "taskname": "Make - Purchase Order",
+                    "eventdatetime": "06/02/2025 12:10:42",
+                    "displaytitle": "09HQ/2024/PO/000085",
+                    "displaycontent": "09HQ/2024/PO/000085\r\n",
+                    "tasktype": "Make",
+                    "rectype": "PEG",
+                    "msgtype": "NA",
+                    "taskstatus": "made",
+                    "cstatus": "Completed"
+                },
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": null,
+                    "eventdatetime": "06/02/2025 11:44:09",
+                    "displaytitle": "New Purchase Order - Purchase Order- 09HQ/2024/PO/000084",
+                    "displaycontent": "New Purchase Order has been created- Purchase Order- 09HQ/2024/PO/000084",
+                    "tasktype": null,
+                    "rectype": "MSG",
+                    "msgtype": "Form Notification",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                },
+                {
+                    "touser": null,
+                    "fromuser": "admin",
+                    "taskname": "Make - Purchase Order",
+                    "eventdatetime": "06/02/2025 11:43:11",
+                    "displaytitle": "09HQ/2024/PO/000084",
+                    "displaycontent": "09HQ/2024/PO/000084\r\n",
+                    "tasktype": "Make",
+                    "rectype": "PEG",
+                    "msgtype": "NA",
+                    "taskstatus": "made",
+                    "cstatus": "Completed"
+                },
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": null,
+                    "eventdatetime": "05/02/2025 12:54:55",
+                    "displaytitle": "New Purchase Order - Purchase Order- 09HQ/2024/PO/000083",
+                    "displaycontent": "New Purchase Order has been created- Purchase Order- 09HQ/2024/PO/000083",
+                    "tasktype": null,
+                    "rectype": "MSG",
+                    "msgtype": "Form Notification",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                },
+                {
+                    "touser": null,
+                    "fromuser": "admin",
+                    "taskname": "Make - Purchase Order",
+                    "eventdatetime": "05/02/2025 12:53:00",
+                    "displaytitle": "09HQ/2024/PO/000083",
+                    "displaycontent": "09HQ/2024/PO/000083\r\n",
+                    "tasktype": "Make",
+                    "rectype": "PEG",
+                    "msgtype": "NA",
+                    "taskstatus": "made",
+                    "cstatus": "Completed"
+                },
+                {
+                    "touser": "admin",
+                    "fromuser": "admin",
+                    "taskname": null,
+                    "eventdatetime": "05/02/2025 12:51:51",
+                    "displaytitle": "New Sales Order has been created- 09HQ/2024/SO/000089",
+                    "displaycontent": "New Sales Order has been created- 09HQ/2024/SO/000089",
+                    "tasktype": null,
+                    "rectype": "MSG",
+                    "msgtype": "Form Notification",
+                    "taskstatus": null,
+                    "cstatus": "Active"
+                }
+            ]
+
+            function getMaterialIconName(task) {
+                const taskIcons = {
+                    "task-peg": "account_tree",
+                    "task-make": "task",
+                    "task-made": "task",
+                    "task-approval": "fact_check",
+                    "task-checked": "fact_check",
+                    "task-approved": "task_alt",
+                    "task-rejected": "scan_delete",
+                    "task-returned": "source_notes",
+                    "task-sent": "share_windows",
+                    "task-escalation": "problem",
+                    "task-reminder": "notifications_active",
+                    "task-msg": "chat",
+                    "task-excel export": "file_export",
+                    "task-formnotification": "assignment_late"
+                };
+
+                return taskIcons[task] || "task";
+            }
+
+            function constructTaskStatusString(data) {
+                const parts = [];
+
+                if (data.taskstatus) {
+                    parts.push(`task-${data.taskstatus}`);
+                } else if (data.tasktype) {
+                    parts.push(`task-${data.tasktype}`);
+                }
+
+                return parts.join("")?.replaceAll(" ", "").toLowerCase() || "";
+            }
+
+            function constructTaskTypeString(data) {
+                const parts = [];
+
+                if (data.msgtype && data.msgtype.toLowerCase() != "na") {
+                    parts.push(`task-msg`);
+                } else if (data.rectype) {
+                    parts.push(`task-${data.rectype}`);
+                }
+
+                return parts.join("")?.replaceAll(" ", "").toLowerCase() || "";
+            }
+            const renderTimeFormat = (datetime) => {
+                const now = new Date();
+                const eventDate = new Date(datetime.replace(/(\d+)\/(\d+)\/(\d+)/, '$2/$1/$3')); // Parse DD/MM/YYYY
+                const diffTime = Math.abs(now - eventDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays === 0) return "Today";
+                if (diffDays === 1) return "Yesterday";
+                if (diffDays <= 7) return "This Week";
+                if (diffDays <= 14) return "Last Week";
+                if (diffDays <= 30) return "Last Month";
+                return "Older";
+            };
+
+            const renderHTML = (item) => {
+
+                const displayTitle = item.displaytitle || "-";
+                const status = item.cstatus?.toLowerCase() || "";
+                const displayContent = item.displaycontent || "No Content";
+                const timeFormat = renderTimeFormat(item.eventdatetime);
+                const firstText = displayTitle.charAt(0).toUpperCase();
+                const taskClass = constructTaskStatusString(item);
+                const taskTypeClass = constructTaskTypeString(item);
+
+                var iconName = getMaterialIconName(taskClass || taskTypeClass || "") || "task";
+
+                return `
+        <div class="listrow ${status} ${taskClass} ${taskTypeClass}">
+            <div class="row">
+                <div class="col-2 checkbox-wrapper">
+                    <div class="symbol symbol-35px symbol-circle ${status} ${taskClass} ${taskTypeClass}">
+                        <span class="symbol-label bg-danger text-white fs-6 fw-bolder"><span class="material-icons material-icons-style material-icons-2">${iconName}</span></span>
+      </div>
+      </div>
+                <div class="col-7">
+                    <a href="javascript:void(0)" class="tasktitle border-bottom">${displayTitle}</a>
+                    <div class="taskcontent">${displayContent}</div>
+      </div>
+                <div class="timespace col-3">
+                    <div class="nametime">${timeFormat}</div>
+      </div>
+      </div>
+      </div>
+    `;
+            };
+
+            const container = document.querySelector("#ActiveListcardbody_{{axp_cardsid}}");
+            data.forEach((item) => {
+                container.innerHTML += renderHTML(item);
+            });
+
+            $("#ActiveListcardbody_{{axp_cardsid}}").parent().find(".placeholder-content").addClass("d-none")
+
+
+        }, 1)
+
+    </script>
+</div>

@@ -1,0 +1,231 @@
+<div data-shadowdom="false" class="">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-4">Districtwise Projects - Map View </h4>
+            <div class="card-toolbar">
+                <a href="#" data-bs-toggle="tooltip" class="" title="Open"
+                    onclick="navigateToUrl('hDistrictwise Projects()')">
+                    <span class="material-icons material-icons-style material-icons-2">
+                        open_in_new
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body" id="mapcard">
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            class MapComponent {
+                constructor(hostElement) {
+                    this.shadow = hostElement.attachShadow({ mode: 'open' });
+                    this.initialize();
+                }
+
+                async initialize() {
+                    const styles = document.createElement('style');
+                    styles.textContent = `
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            
+            #map {
+                height: 600px;
+                width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 0 !important;
+            }
+
+            .header {
+                background-color: #f8f9fa;
+                padding: 20px 0;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .legend {
+                background: white;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .marker-label {
+                background: none;
+                border: none;
+                box-shadow: none;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+                width: auto !important;
+                text-align: center;
+            }
+
+            .popup-link {
+                color: #007bff;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+
+            .popup-link:hover {
+                color: #0056b3;
+                text-decoration: none;
+            }
+        `;
+
+                    const container = document.createElement('div');
+                    container.innerHTML = `
+            <div id="map"></div>
+        `;
+
+                    const leafletCSS = document.createElement('link');
+                    leafletCSS.rel = 'stylesheet';
+                    leafletCSS.href = '../custompages/custom/leaflet.min.css';
+
+                    const leafletScript = document.createElement('script');
+                    leafletScript.src = '../custompages/custom/leaflet.min.js';
+
+                    this.shadow.appendChild(styles);
+                    this.shadow.appendChild(leafletCSS);
+                    this.shadow.appendChild(leafletScript);
+                    this.shadow.appendChild(container);
+
+                    await new Promise(resolve => leafletScript.onload = resolve);
+                    this.initializeMap();
+                }
+
+                async initializeMap() {
+                    
+                    try {
+                        //Enable this code once you have datasource ready.
+                        //columns needed from datasource ->name,value,link
+                        /*
+                        const input = {
+                            name: "ds_pmsmapcard",
+                            sqlParams: {}
+                        };
+                        new EntityCommon().getDataFromDataSource(input, (result) => {
+                            this.plotInMap(result);
+                        }, () => {
+                            console.error('Error fetching data');
+                        });
+                        */
+
+                        //Sample from sample JSON;
+
+                        var result = "{\"result\":{\"message\":\"success\",\"data\":[{\"data_json\":\"[{\\\"name\\\":\\\"Jaisalmer\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Jaisalmer)\\\"},{\\\"name\\\":\\\"Alwar,Dausa,Jaipur,Jaisalmer,Jodhpur\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Alwar,Dausa,Jaipur,Jaisalmer,Jodhpur)\\\"},{\\\"name\\\":\\\"Jodhpur\\\",\\\"value\\\":3,\\\"link\\\":\\\"iprjlist(pdistrict=Jodhpur)\\\"},{\\\"name\\\":\\\"Dausa\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Dausa)\\\"},{\\\"name\\\":\\\"Pali\\\",\\\"value\\\":2,\\\"link\\\":\\\"iprjlist(pdistrict=Pali)\\\"},{\\\"name\\\":\\\"Udaipur\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Udaipur)\\\"},{\\\"name\\\":\\\"Jaipur\\\",\\\"value\\\":5,\\\"link\\\":\\\"iprjlist(pdistrict=Jaipur)\\\"},{\\\"name\\\":\\\"Dungarpur\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Dungarpur)\\\"},{\\\"name\\\":\\\"jaisalmer\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=jaisalmer)\\\"},{\\\"name\\\":\\\"Bhilwara\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Bhilwara)\\\"},{\\\"name\\\":\\\"Bengaluru\\\",\\\"value\\\":2,\\\"link\\\":\\\"iprjlist(pdistrict=Bengaluru)\\\"},{\\\"name\\\":\\\"Churu,Jhunjhunu\\\",\\\"value\\\":1,\\\"link\\\":\\\"iprjlist(pdistrict=Churu,Jhunjhunu)\\\"}]\"}],\"success\":true}}";
+                        this.plotInMap(result);
+
+                    } catch (error) {
+                        console.error('Error initializing map:', error);
+                    }
+                }
+
+                plotInMap(result) {
+                    const districts = [
+                        { "name": "Jaipur", "state": "Rajasthan", "lat": 26.9124, "long": 75.7873 },
+                        { "name": "Bengaluru", "state": "Karnataka", "lat": 12.9716, "long": 77.5946 },
+                        { "name": "Udaipur", "state": "Rajasthan", "lat": 24.5854, "long": 73.7125 },
+                        { "name": "Pali", "state": "Rajasthan", "lat": 25.7781, "long": 73.3311 },
+                        { "name": "Dungarpur", "state": "Rajasthan", "lat": 23.8415, "long": 73.7148 },
+                        { "name": "Jodhpur", "state": "Rajasthan", "lat": 26.2389, "long": 73.0243 },
+                        { "name": "Jaisalmer", "state": "Rajasthan", "lat": 26.9157, "long": 70.9083 },
+                        { "name": "Bhilwara", "state": "Rajasthan", "lat": 25.3407, "long": 74.6313 }
+                    ];
+                    
+                    const mapdata = JSON.parse(JSON.parse(result).result.data[0].data_json);
+                    const mapElement = this.shadow.querySelector('#map');
+                    const map = L.map(mapElement).setView([26.5844, 73.8496], 7);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    districts.filter(d => d.state === "Rajasthan").forEach(district => {
+                        const projectData = mapdata.find(d => d.name.toLowerCase() === district.name.toLowerCase());
+                        const value = projectData ? projectData.value : 0;
+                        const link = projectData ? projectData.link : '';
+
+                        // Create circle marker
+                        const marker = L.circleMarker([district.lat, district.long], {
+                            radius: 10 + (value * 2),
+                            fillColor: this.getColor(value),
+                            color: '#fff',
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        }).addTo(map);
+
+                        // Add value label
+                        const label = L.divIcon({
+                            className: 'marker-label',
+                            html: `<div style="font-size:16px !important;">${value}</div>`,
+                            iconSize: [20, 20],
+                            iconAnchor: [10, 10]
+                        });
+
+                        L.marker([district.lat, district.long], {
+                            icon: label,
+                            interactive: false
+                        }).addTo(map);
+
+                        // Create popup content with clickable link
+                        const popupContent = document.createElement('div');
+                        popupContent.innerHTML = `
+                        <div class="popup-content">
+                            <strong class="popup-link" onclick="navigateToUrl('${link}')" style="cursor: pointer;">
+                                ${district.name}
+                            </strong>
+                            
+
+                            Projects: ${value}
+                        </div>
+                    `;
+
+                        // Add click event listener to the popup content
+                        marker.bindPopup(popupContent);
+                    });
+
+                    this.addLegend(map);
+                }
+
+                getColor(value) {
+                    return value > 6 ? '#800026' :
+                        value > 4 ? '#BD0026' :
+                            value > 2 ? '#E31A1C' :
+                                value > 1 ? '#FC4E2A' :
+                                    '#FED976';
+                }
+
+                addLegend(map) {
+                    const legend = L.control({ position: 'bottomright' });
+                    legend.onAdd = (map) => {
+                        const div = L.DomUtil.create('div', 'legend');
+                        const grades = [0, 1, 2, 4, 6];
+
+                        div.innerHTML = '<h6>Number of Projects</h6>';
+
+                        for (let i = 0; i < grades.length; i++) {
+                            div.innerHTML += `
+                    <i style="background:${this.getColor(grades[i] + 1)}; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7"></i>
+                    ${grades[i]}${grades[i + 1] ? '&ndash;' + grades[i + 1] + '' : '+'}
+                `;
+                        }
+                        return div;
+                    };
+                    legend.addTo(map);
+                }
+            }
+
+            const mapDiv = document.getElementById('mapcard');
+            new MapComponent(mapDiv);
+        }, 1);
+
+    </script>
+</div>

@@ -1,0 +1,110 @@
+<div data-shadowdom="false" class="dasboard-cards">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-4">{{cardname}}</h4>
+
+        </div>
+        <div class="card-body">
+            <div class="placeholder-content">
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+            </div>
+            <div class="HomePageMenuOptionCards mb-8 col-md-12"></div>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            //Enable this code once you have datasource ready.
+            //columns needed from datasource ->title,subtitle,time,link,image
+
+            /*
+            var dsObj = new EntityCommon();
+            var data = dsObj.getCardData(`{{cardname}}`);            
+            */
+
+            //Following is a sample json.
+            var data = [
+                {
+                    "name": "Sales Order",
+                    "link": "tslord()"
+                },
+                {
+                    "name": "Invoice",
+                    "link": "tincdv()"
+                },
+                {
+                    "name": "Sales Return",
+                    "link": "tsalry()"
+                },
+                {
+                    "name": "Purchase Order",
+                    "link": "ttslpo()"
+                },
+                {
+                    "name": "Purchase Bill",
+                    "link": "tpbill()"
+                },
+                {
+                    "name": "Purchase Return",
+                    "link": "tpurre()"
+                },
+                {
+                    "name": "Goods Receipt Note",
+                    "link": "ttsgrn()"
+                },
+                {
+                    "name": "General Ledger",
+                    "link": "iglsubrep()"
+                },
+                {
+                    "name": "Chart of Accounts",
+                    "link": "iFiCoaLst()"
+                },
+                {
+                    "name": "Trial Balance",
+                    "link": "itrialbal()"
+                }
+            ];
+            let generatedMenuOptionHTML = '';
+            data.forEach((rowData, index) => {
+                const moreOption = rowData.moreoption;
+                var stransid = rowData.stransid;
+                const rowCount = index;
+                rowData.rowCount = rowCount;
+
+                generatedMenuOptionHTML +=
+                    `<div class="mt-3 widgetWrapper htmlDomWrapper col-lg-3 col-md-6 col-sm-12 col-xs-12" id="HP_cards_list" data-cardname="${rowData.name}">
+        <div class="Home-cards-list">
+            <div class="Hp-card-icon attendicon">
+                <img class="w-60px cardsIcons" src="../images/homepageicon/${rowData.name}.png" onerror="this.onerror=null;this.src='../images/homepageicon/default.png';" onclick="navigateToUrl('${rowData.link}')">
+            </div>
+            <span class="Hp-card-title text-truncate" style="cursor:pointer" title="${rowData.name}" onclick="navigateToUrl('${rowData.link}')">${rowData.name}</span><p title="${rowData.name}" class="min-h-45px mh-45px multiline-ellipsis">${name}</p>                
+        </div>
+    </div>`;
+            });
+
+            if (generatedMenuOptionHTML != '') {
+                let divOpen = `<div class=""><div class=""><div class="row d-flex">` + generatedMenuOptionHTML + `</div></div></div>`;
+                const tabContainer = document.querySelector(`.HomePageMenuOptionCards`);
+                tabContainer.innerHTML = divOpen;
+                $(".HomePageMenuOptionCards").parent().find(".placeholder-content").addClass("d-none")
+            } else {
+                const tabContainer = document.querySelector(`.HomePageMenuOptionCards`);
+                tabContainer.classList.add("d-none");
+                $(".HomePageMenuOptionCards").parent().find(".placeholder-content").addClass("d-none")
+            }
+
+        }, 1);
+
+    </script>
+</div>
