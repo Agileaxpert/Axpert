@@ -127,7 +127,7 @@
 
             // Extract initials (2 letters max)
             function getInitials(text) {
-                return text
+                return text.trim()
                     .split(' ')
                     .map(word => word[0].toUpperCase())
                     .slice(0, 2)
