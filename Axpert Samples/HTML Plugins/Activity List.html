@@ -127,10 +127,11 @@
 
             // Extract initials (2 letters max)
             function getInitials(text) {
-                return text.trim()
+                return text
                     .split(' ')
-                    .map(word => word[0].toUpperCase())
-                    .slice(0, 2)
+                    .filter(word => word.trim() !== '')         // remove empty strings
+                    .map(word => word[0].toUpperCase())         // get first letter
+                    .slice(0, 2)                                // take up to 2 initials
                     .join('');
             }
 
