@@ -1,114 +1,107 @@
 <div data-shadowdom="false" class="dasboard-cards">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title mb-4">{{cardname}}</h4>
-            <div class="card-toolbar">
-                <a href="#" data-bs-toggle="tooltip" class="border-bottom"
-                    onclick="LoadIframe('processflow.aspx?calendar=t');">
-                    <span class="material-icons material-icons-style material-icons-2">
-                        open_in_new
-                    </span>
-                </a>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="placeholder-content">
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-                <div class="placeholder-content_item"></div>
-            </div>
-            <div class="row" id="eventsContainer_{{axp_cardsid}}">
-                <!-- Dynamic Events will be inserted here -->
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title mb-4">{{cardname}}</h4>
+      <div class="card-toolbar">
+        <a href="#" data-bs-toggle="tooltip" class="border-bottom" onclick="LoadIframe('processflow.aspx?calendar=t');">
+          <span class="material-icons material-icons-style material-icons-2">
+            open_in_new
+          </span>
+        </a>
+      </div>
     </div>
+    <div class="card-body">
+      <div class="Empty-card-msg d-none">
+        <img class="img-fluid" alt="Card image"  src="https://cdn-icons-png.flaticon.com/128/17426/17426064.png">
+        <p>Interesting news/Upcoming events will be listed in this space.</p>
+      </div>
+      <div class="placeholder-content">
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+      </div>
+      <div class="row eventsContainer" id="eventsContainer_{{axp_cardsid}}">
+        <!-- Dynamic Events will be inserted here -->
+      </div>
+    </div>
+  </div>
 
-    <script>
-        setTimeout(function () {
-            //Enable this code once you have datasource ready.
-            //columns needed from datasource ->title,subtitle,time,link,image
+  <script>
+    setTimeout(function () {
+      //Enable this code once you have datasource ready.
+      //columns needed from datasource ->title,subtitle,time,link,image
 
-            /*
-            var dsObj = new EntityCommon();
-            var data = dsObj.getCardData(`{{cardname}}`);            
-            */
+      var dsObj = new EntityCommon();
+      var data = dsObj.getCardData(`{{cardname}}`);
 
-            //Following is a sample json.
+      const container = document.getElementById('eventsContainer_{{axp_cardsid}}');
 
-            var data = [
-                {
-                    "title": "Meeting",
-                    "subtitle": "Meeting",
-                    "time": "2024-12-07 12:00 PM",
-                    "link": "taxclr(recordid=1202010000001)",
-                    "image": "https://preview.keenthemes.com/rider-html-pro/assets/media/stock/600x400/img-73.jpg"
-                },
-                {
-                    "title": "MyTrial",
-                    "subtitle": "Online meet",
-                    "time": "2024-03-05 12:00 PM",
-                    "link": "taxclr(recordid=1040770000000)",
-                    "image": "https://preview.keenthemes.com/rider-html-pro/assets/media/stock/600x400/img-73.jpg"
-                }
-            ]
-            const container = document.getElementById('eventsContainer_{{axp_cardsid}}');
+      // Function to calculate human-readable time difference
+      function timeAgo(date) {
+        const now = new Date();
+        const eventDate = new Date(date);
+        const diffInSeconds = Math.floor((now - eventDate) / 1000);
+        const minutes = Math.floor(diffInSeconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const weeks = Math.floor(days / 7);
+        const months = Math.floor(days / 30);
 
-            // Function to calculate human-readable time difference
-            function timeAgo(date) {
-                const now = new Date();
-                const eventDate = new Date(date);
-                const diffInSeconds = Math.floor((now - eventDate) / 1000);
-                const minutes = Math.floor(diffInSeconds / 60);
-                const hours = Math.floor(minutes / 60);
-                const days = Math.floor(hours / 24);
-                const weeks = Math.floor(days / 7);
-                const months = Math.floor(days / 30);
+        if (diffInSeconds < 60) return "Last updated just now";
+        if (minutes < 60) return `Last updated ${minutes} min${minutes > 1 ? "s" : ""} ago`;
+        if (hours < 24) return `Last updated ${hours} hour${hours > 1 ? "s" : ""} ago`;
+        if (days < 7) return `Last updated ${days} day${days > 1 ? "s" : ""} ago`;
+        if (weeks < 4) return `Last updated ${weeks} week${weeks > 1 ? "s" : ""} ago`;
+        return `Last updated ${months} month${months > 1 ? "s" : ""} ago`;
+      }
+      if (data && data.length == 0) {
+        $("#eventsContainer_{{axp_cardsid}}").parent().find(".placeholder-content").addClass("d-none");
+        $("#eventsContainer_{{axp_cardsid}}").addClass("d-none");
+        $("#eventsContainer_{{axp_cardsid}}").parent().find(".Empty-card-msg").removeClass("d-none");
+      }
+      else {
 
-                if (diffInSeconds < 60) return "Last updated just now";
-                if (minutes < 60) return `Last updated ${minutes} min${minutes > 1 ? "s" : ""} ago`;
-                if (hours < 24) return `Last updated ${hours} hour${hours > 1 ? "s" : ""} ago`;
-                if (days < 7) return `Last updated ${days} day${days > 1 ? "s" : ""} ago`;
-                if (weeks < 4) return `Last updated ${weeks} week${weeks > 1 ? "s" : ""} ago`;
-                return `Last updated ${months} month${months > 1 ? "s" : ""} ago`;
-            }
+        data.forEach(event => {
+          const card = document.createElement('div');
+          card.className = 'col-lg-12 Events-items';
+          if(event?.image && typeof event.image != "undefined" && event.image != "")
+            event.image = event.image.replace('$APP_NAME$', window.top.mainProject) + "?v=" + event.modifiedon.replaceAll(" ", "").replaceAll("T", "").replaceAll("-", "") ;
+    else
+            event.image = "images/NotificationIcons/Announcement.png";
+          
+          card.innerHTML = `
+              <div class="card">
+                  <div class="row no-gutters align-items-center">
+                      <div class="col-md-3">
+                          <img class="card-img img-fluid" height="100" width="100" alt="Card image" src="../${event.image}">
+                      </div>
+                      <div class="col-md-9">
+                          <div class="card-body">
+                              <h5 class="card-title">
+                                  <a href="#" class="text-decoration-none" onclick="navigateToUrl('${event.link}')">${event.title}</a>
+                              </h5>
+                              <p class="card-text">${event.subtitle}</p>
+                              <p class="card-text"><small class="text-muted">${timeAgo(event.modifiedon.replaceAll("T", " "))}</small></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          `;
 
-            data.forEach(event => {
-                const card = document.createElement('div');
-                card.className = 'col-lg-12 Events-items';
+          container.appendChild(card);
+        });
 
-                card.innerHTML = `
-                <div class="card">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col-md-3">
-                            <img class="card-img img-fluid" alt="Card image" src="${event.image}">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a href="#" class="text-decoration-none" onclick="navigateToUrl('${event.link}')">${event.title}</a>
-                                </h5>
-                                <p class="card-text">${event.subtitle}</p>
-                                <p class="card-text"><small class="text-muted">${timeAgo(event.time)}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+        $("#eventsContainer_{{axp_cardsid}}").parent().find(".placeholder-content").addClass("d-none");
+      }
+    }, 1)
 
-                container.appendChild(card);
-            });
-
-            $("#eventsContainer_{{axp_cardsid}}").parent().find(".placeholder-content").addClass("d-none");
-
-        }, 1)
-
-    </script>
+  </script>
 </div>
