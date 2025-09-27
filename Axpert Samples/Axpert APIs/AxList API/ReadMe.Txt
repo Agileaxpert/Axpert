@@ -2,6 +2,7 @@ A fully functional example of use of AxList API in Axpert is demonstrated here.
 
 1) Create a table and insert sample data from the Sample SQLs.txt file.
 2) Create an ADS from the ADS Samples.txt file.
+3) Use HTML file Employee Master Sample.html to test the AxList API from Custom HTML page.
 
 3) Calling AxList API from Custom HTML pages:
 	a) To call the AxList API from Custom HTML pages, refer AxInterface.js from Axpert JS folder.
