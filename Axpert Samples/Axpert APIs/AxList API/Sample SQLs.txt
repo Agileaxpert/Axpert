@@ -1,0 +1,64 @@
+-- Create employee master table
+CREATE TABLE employee_master_ads_data (
+    employee_id      SERIAL ,
+    employee_code    VARCHAR(20) NOT NULL,
+    first_name       VARCHAR(50) NOT NULL,
+    last_name        VARCHAR(50),
+    gender           VARCHAR(10),
+    dob              DATE,
+    doj              DATE NOT NULL,
+    email            VARCHAR(100) NOT NULL,
+    phone            VARCHAR(20),
+    department       VARCHAR(100),
+    designation      VARCHAR(100),
+    manager_name     VARCHAR(100),
+    address          VARCHAR(255),
+    city             VARCHAR(100),
+    state            VARCHAR(100),
+    country          VARCHAR(100),
+    zipcode          VARCHAR(15),
+    salary           NUMERIC(12,2),
+    status           VARCHAR(20) DEFAULT 'Active',
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample data into employee master table
+INSERT INTO employee_master_ads_data 
+(employee_code, first_name, last_name, gender, dob, doj, email, phone, department, designation, manager_name, address, city, state, country, zipcode, salary, status)
+SELECT 
+    'EMP' || LPAD(i::text, 3, '0') AS employee_code,
+    'FirstName' || i AS first_name,
+    'LastName' || i AS last_name,
+    CASE WHEN i % 2 = 0 THEN 'Male' ELSE 'Female' END AS gender,
+    (DATE '1980-01-01' + (i * 30) % 10000) AS dob,
+    (DATE '2010-01-01' + (i * 10) % 5000) AS doj,
+    'employee' || i || '@example.com' AS email,
+    '900000' || LPAD(i::text, 4, '0') AS phone,
+    CASE 
+        WHEN i % 4 = 0 THEN 'IT'
+        WHEN i % 4 = 1 THEN 'HR'
+        WHEN i % 4 = 2 THEN 'Finance'
+        ELSE 'Sales'
+    END AS department,
+    CASE 
+        WHEN i % 4 = 0 THEN 'Software Engineer'
+        WHEN i % 4 = 1 THEN 'HR Manager'
+        WHEN i % 4 = 2 THEN 'Accountant'
+        ELSE 'Sales Executive'
+    END AS designation,
+    'Manager' || (i % 10) AS manager_name,
+    'Address ' || i AS address,
+    'City' || (i % 20) AS city,
+     CASE 
+        WHEN i % 4 = 0 THEN 'Tamil Nadu'
+        WHEN i % 4 = 1 THEN 'Karnataka'
+        WHEN i % 4 = 2 THEN 'Kerala'
+        ELSE 'Rajasthan'
+    END AS state,
+    'India' AS country,
+    '100' || (i % 50) AS zipcode,
+    40000 + (i * 100) AS salary,
+    CASE WHEN i % 5 = 0 THEN 'Inactive' ELSE 'Active' END AS status
+FROM generate_series(1,1000) s(i);
+

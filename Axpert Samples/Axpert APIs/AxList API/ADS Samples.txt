@@ -1,0 +1,48 @@
+Axpert Developers can configure the ADS Definition in way to handle the following and users can implement dynamic SQLs in ADS:
+	* Filtering
+	* Sorting
+	* Pagination
+	* Permission based filtering
+
+The following AxList API keywords can be used in ADS SQL to achieve the above functionalities:
+1) --ax_ui_filter_withwhere -> This is to append a dynamic 'where' clause
+2) --ax_ui_filter -> This is to add a dynamic 'and' statement
+3) --ax_orderby -> This is to add a dynamic 'orderby' clause
+4) --ax_orderby_append -> This is to append a  field to existing 'orderby' clause
+5) --ax_pagination -> This is to add pagination.
+6) --ax_permission_filter -> This is to apply constraints from user permissions
+
+
+ADS Name:
+employee_master_ads
+
+ADS sql:
+select employee_code, first_name, last_name, gender, dob, doj, email, phone, department, designation, manager_name, address, city, state, country, zipcode, salary, status 
+from employee_master_ads_data
+where state = :userparam_state --ax_ui_filter
+--ax_orderby
+--ax_pagination
+
+Other sample sql:
+select employee_code, first_name, last_name, gender, dob, doj, email, phone, department, designation, manager_name, address, city, state, country, zipcode, salary, status 
+from employee_master_ads_data
+--ax_ui_filter_withwhere 
+--ax_orderby_append
+--ax_pagination
+
+Sample SQL:
+-----------
+select * from users
+where allusergroup = 'default'
+--ax_permission_filter
+--ax_ui_filter or --ax_ui_filter_withwhere
+--ax_orderby or --ax_orderby_append
+--ax_pagination
+
+Final SQL to be executed:
+------------------------
+select * from users
+where allusergroup = 'default'
+and username like '%admin%'
+orderby username desc
+LIMIT 100 offset 1

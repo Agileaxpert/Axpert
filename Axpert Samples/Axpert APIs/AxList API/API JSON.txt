@@ -1,0 +1,50 @@
+curl --location 'http://localhost:5000/api/v1/AxList' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFSTS1JTlRFUk5BTC0xNzBCMzYwQ0VDMTkwNjk5MkEzMjhSUzI1NiJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJzaWQiOiJBUk0tYWdpbGVlcnBiYXNldGVzdC1mODlmMjBjMC0yYWM4LTRmZWYtODdhMC01MjJlMjA4YzM3YWIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IkFSTS1hZ2lsZWVycGJhc2V0ZXN0LWY4OWYyMGMwLTJhYzgtNGZlZi04N2EwLTUyMmUyMDhjMzdhYiIsIm5iZiI6MTc1ODkzODk1MSwiZXhwIjoxNzU4OTQyNTUxLCJpc3MiOiJBeHBlcnQgLSBBUk0iLCJhdWQiOiJBeHBlcnQgLSBBUk0ifQ.NOlCbZtJEQRuJvZ9xRYkcrfcMerOrkvf3_UsibHs_Ds' \
+--data '{
+    "ARMSessionId": "ARM-agileerpbasetest-f89f20c0-2ac8-4fef-87a0-522e208c37ab",
+    "action": "view",    
+    "ADSNames": [
+        "employee_master_ads"
+    ],    
+    
+    "trace": false,
+    "RefreshCache": false,
+    "sqlparams": {
+        "userparam_state": "Karnataka"
+    },    
+    "ADS" : true,
+    "CachePermissions": true,
+    "getallrecordscount": true,
+    "pageno": 1,
+    "pagesize": 0,
+    "keyfield": "",
+    "keyvalue": "",
+    "sorting": [
+        {
+            "fldname": "employee_code",
+            "sort_order": "desc"
+        }
+    ],
+    "filters": [
+        {
+            "fldname": "gender",
+            "datatype": "TEXT",
+            "value": "Female",
+            "condition": "CONTAINS"
+        },
+        {
+            "fldname": "salary",
+            "datatype": "NUMERIC",
+            "from": "1000",
+            "to": "100000000"
+        },
+        {
+            "fldname": "department",
+            "datatype": "DROPDOWN",
+            "value": [
+               "HR", "Finance", "Sales", "IT"
+            ]
+        }
+    ]
+}'
