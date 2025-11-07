@@ -23,7 +23,7 @@ dependencies:
   arm_encrypt_secret:
     git:
       url: https://github.com/Agileaxpert/Axpert.git
-      path: "Axpert Samples/Flutter_Packages/arm_encrypt_secret"
+      path: "Flutter_Packages/arm_encrypt_secret"
 ```
 
 # ⚠️ Important: Always wrap the path in quotes since it contains spaces and dots.
