@@ -3,16 +3,16 @@ import 'dart:typed_data';
 import 'package:arm_encrypt_secret/src/ax_exceptions.dart';
 import 'package:pointycastle/export.dart';
 
-
 class EncryptDecryptSecretKeys {
   static String encryptSecretKey(String secretKey) {
     try {
       if (secretKey.isEmpty || secretKey.length != 16) {
         throw AesEncryptionException(
-            'Invalid key: must be 16 characters (128-bit AES key)');
+          'Invalid key: must be 16 characters (128-bit AES key)',
+        );
       }
 
-      final now = DateTime.now().toUtc();
+      final now = DateTime.now();
       final currentTime =
           '${now.year.toString().padLeft(4, '0')}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}${now.second.toString().padLeft(2, '0')}';
       return _encryptString(currentTime, secretKey);
@@ -28,7 +28,8 @@ class EncryptDecryptSecretKeys {
       }
       if (secretKey.isEmpty || secretKey.length != 16) {
         throw AesEncryptionException(
-            'Invalid key: must be 16 characters (128-bit AES key)');
+          'Invalid key: must be 16 characters (128-bit AES key)',
+        );
       }
 
       return _decryptString(encryptedText, secretKey);
@@ -83,14 +84,13 @@ class EncryptDecryptSecretKeys {
   }
 
   static Uint8List _generateIV(int length) {
-    final rnd = SecureRandom('Fortuna')
-      ..seed(
-        KeyParameter(
-          Uint8List.fromList(
-            List<int>.generate(32, (i) => DateTime.now().microsecond % 256),
-          ),
+    final rnd = SecureRandom('Fortuna')..seed(
+      KeyParameter(
+        Uint8List.fromList(
+          List<int>.generate(32, (i) => DateTime.now().microsecond % 256),
         ),
-      );
+      ),
+    );
     return rnd.nextBytes(length);
   }
 }
