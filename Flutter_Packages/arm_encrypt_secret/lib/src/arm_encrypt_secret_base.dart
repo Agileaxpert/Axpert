@@ -21,6 +21,15 @@ class EncryptSecretKeys {
       throw Exception("Specified key is not a valid size for this algorithm.");
     }
 
+    final parsedUri = Uri.tryParse(armUrl);
+
+    if (parsedUri == null ||
+        !parsedUri.hasScheme ||
+        (parsedUri.scheme != "http" && parsedUri.scheme != "https") ||
+        parsedUri.host.isEmpty) {
+      throw Exception("Specified URL is not valid.");
+    }
+
     final url = Uri.parse("$armUrl$_endpoint");
 
     try {
