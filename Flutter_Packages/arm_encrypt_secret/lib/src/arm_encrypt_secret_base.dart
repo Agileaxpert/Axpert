@@ -13,14 +13,6 @@ class EncryptSecretKeys {
   }) async {
     final httpClient = client ?? http.Client();
 
-    if (!armUrl.endsWith("/")) {
-      throw Exception("Make sure your ARM URL ends with '/' ");
-    }
-
-    if (key.length != 16) {
-      throw Exception("Specified key is not a valid size for this algorithm.");
-    }
-
     final parsedUri = Uri.tryParse(armUrl);
 
     if (parsedUri == null ||
@@ -28,6 +20,14 @@ class EncryptSecretKeys {
         (parsedUri.scheme != "http" && parsedUri.scheme != "https") ||
         parsedUri.host.isEmpty) {
       throw Exception("Specified URL is not valid.");
+    }
+
+    if (!armUrl.endsWith("/")) {
+      throw Exception("Make sure your ARM URL ends with '/' ");
+    }
+
+    if (key.length != 16) {
+      throw Exception("Specified key is not a valid size for this algorithm.");
     }
 
     final url = Uri.parse("$armUrl$_endpoint");
