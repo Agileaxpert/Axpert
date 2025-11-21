@@ -1,56 +1,108 @@
-import 'dart:developer';
+import 'dart:convert';
+import 'package:test/test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 
 import 'package:arm_encrypt_secret/arm_encrypt_secret.dart';
-import 'package:arm_encrypt_secret/src/ax_exceptions.dart';
-import 'package:test/test.dart';
 
 void main() {
-  const testKey = '1234567890123456';
+  group('EncryptSecretKeys.encryptSecretKey', () {
+    test('returns encrypted string when statusCode = 200', () async {
+      final mockClient = MockClient((request) async {
+        return http.Response(
+          'uyDf8YOcL1IugFbJ2SNqOuFvZhYYSElCqWYgeuMtEw==',
+          200,
+        );
+      });
 
-  group('EncryptDecryptSecretKeys Tests', () {
-    test('\n1️⃣ Encrypt and decrypt should round-trip correctly', () {
-      final encrypted = EncryptDecryptSecretKeys.encryptSecretKey(testKey);
-      final decrypted = EncryptDecryptSecretKeys.decryptSecretKey(
-        encrypted,
-        testKey,
+      final result = await EncryptSecretKeys.encryptSecretKey(
+        armUrl: "https://example.com/",
+        key: "1234567890123456",
+        client: mockClient,
       );
 
-      expect(decrypted.length, 14, reason: 'Timestamp should be 14 chars long');
-      log('✅ Test 1 passed: Round-trip encryption/decryption successful.');
-      log('   Encrypted sample: $encrypted');
-      log('   Decrypted output: $decrypted');
+      expect(result, 'uyDf8YOcL1IugFbJ2SNqOuFvZhYYSElCqWYgeuMtEw==');
     });
 
-    test('\n2️⃣ Decrypt should fail with wrong key', () {
-      final encrypted = EncryptDecryptSecretKeys.encryptSecretKey(testKey);
+    test('throws message when HTTP 500 JSON error occurs', () async {
+      final mockClient = MockClient((request) async {
+        return http.Response(
+          jsonEncode({
+            "result": {
+              "statuscode": 500,
+              "message":
+                  "Specified key is not a valid size for this algorithm.",
+            },
+            "Result": null,
+          }),
+          500,
+        );
+      });
 
       expect(
-        () => EncryptDecryptSecretKeys.decryptSecretKey(
-          encrypted,
-          'wrongpassword!!',
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "https://example.com/",
+          key: "1234567890123456",
+          client: mockClient,
         ),
-        throwsA(isA<AesEncryptionException>()),
-      );
-      log('✅ Test 2 passed: Wrong key correctly triggered exception.');
-    });
-
-    test('\n3️⃣ Encrypt should throw error for empty key', () {
-      expect(
-        () => EncryptDecryptSecretKeys.encryptSecretKey(''),
-        throwsA(isA<AesEncryptionException>()),
-      );
-      log('✅ Test 3 passed: Empty key correctly rejected.');
-    });
-
-    test('\n4️⃣ Decrypt should throw error for malformed Base64 input', () {
-      expect(
-        () => EncryptDecryptSecretKeys.decryptSecretKey(
-          'not_base64_text',
-          testKey,
+        throwsA(
+          predicate(
+            (e) => e.toString().contains(
+              "Specified key is not a valid size for this algorithm.",
+            ),
+          ),
         ),
-        throwsA(isA<AesEncryptionException>()),
       );
-      log('✅ Test 4 passed: Malformed Base64 input correctly rejected.');
+    });
+
+    test('throws error when key length is not 16', () async {
+      expect(
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "https://example.com/",
+          key: "123",
+        ),
+        throwsA(predicate((e) => e.toString().contains("valid size"))),
+      );
+    });
+
+    test('throws error when armUrl does not end with slash', () async {
+      expect(
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "https://example.com",
+          key: "1234567890123456",
+        ),
+        throwsA(predicate((e) => e.toString().contains("ends with"))),
+      );
+    });
+
+    test('throws network error when post throws exception', () async {
+      final mockClient = MockClient((_) async {
+        throw Exception("Network Broken");
+      });
+
+      expect(
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "https://example.com/",
+          key: "1234567890123456",
+          client: mockClient,
+        ),
+        throwsA(predicate((e) => e.toString().contains("Network error"))),
+      );
+    });
+
+    test('throws error when HTTP 500 returns invalid JSON', () async {
+      final mockClient = MockClient((_) async {
+        return http.Response("THIS_IS_NOT_JSON", 500);
+      });
+
+      expect(
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "https://example.com/",
+          key: "1234567890123456",
+          client: mockClient,
+        ),
+        throwsA(predicate((e) => e.toString().contains("invalid JSON"))),
+      );
     });
   });
 }

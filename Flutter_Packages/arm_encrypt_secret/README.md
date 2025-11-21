@@ -1,158 +1,39 @@
-# arm_encrypt_secret 🔐
+<!-- 
+This README describes the package. If you publish this package to pub.dev,
+this README's contents appear on the landing page for your package.
 
-A lightweight Dart package for **AES/CFB8 encryption and decryption**
-Ideal for encrypting timestamps, tokens, or short secret keys between **Flutter apps** and **.NET backends**.
+For information about how to write a good package README, see the guide for
+[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
 
----
+For general information about developing packages, see the Dart guide for
+[creating packages](https://dart.dev/guides/libraries/create-packages)
+and the Flutter guide for
+[developing packages and plugins](https://flutter.dev/to/develop-packages). 
+-->
 
-## ✨ Features
+TODO: Put a short description of the package here that helps potential users
+know whether this package might be useful for them.
 
-- AES encryption using **CFB8 mode (8-bit feedback)**
-- **IV prepended** to ciphertext for C# compatibility
-- No padding required (stream cipher behavior)
-- Unit-tested for correctness and failure handling
+## Features
 
----
+TODO: List what your package can do. Maybe include images, gifs, or videos.
 
-## 🧩 Installation
+## Getting started
 
-Add this to your app’s `pubspec.yaml`:
+TODO: List prerequisites and provide or point to information on how to
+start using the package.
 
-```yaml
-dependencies:
-  arm_encrypt_secret:
-    git:
-      url: https://github.com/Agileaxpert/Axpert.git
-      path: "Flutter_Packages/arm_encrypt_secret"
-```
+## Usage
 
-# ⚠️ Important: Always wrap the path in quotes since it contains spaces and dots.
-
-> Or use a local path if it’s part of your monorepo:
->
-> ```yaml
-> dependencies:
->   arm_encrypt_secret:
->     path: ../repo_root/dart_utils/arm_encrypt_secret
-> ```
-
-Then run:
-
-```bash
-flutter pub get
-```
-
----
-
-## 🚀 Usage
+TODO: Include short and useful examples for package users. Add longer examples
+to `/example` folder. 
 
 ```dart
-import 'package:arm_encrypt_secret/arm_encrypt_secret.dart';
-
-void main() {
-  const secretKey = '1234567890123456'; // 16-char AES key
-  print('--- ARM Encrypt Secret Example ---');
-
-  try {
-    // Encrypt the current UTC timestamp
-    final encrypted = EncryptDecryptSecretKeys.encryptSecretKey(secretKey);
-    print('🔒 Encrypted (Base64): $encrypted');
-
-    // Decrypt back to timestamp string
-    final decrypted = EncryptDecryptSecretKeys.decryptSecretKey(encrypted, secretKey);
-    print('🔓 Decrypted timestamp: $decrypted');
-  } on AesEncryptionException catch (e) {
-    print('❌ Encryption error: ${e.message}');
-  }
-
-  // Example of invalid input handling
-  try {
-    EncryptDecryptSecretKeys.decryptSecretKey('not_base64_text', secretKey);
-  } on AesEncryptionException catch (e) {
-    print('⚠️ Expected error: ${e.message}');
-  }
-}
+const like = 'sample';
 ```
 
----
+## Additional information
 
-## ⚙️ API Overview
-
-### `EncryptDecryptSecretKeys.encryptSecretKey(String secretKey)`
-
-Encrypts using the provided 16-character AES key.  
-Returns a Base64-encoded string with the IV prepended.
-
-### `EncryptDecryptSecretKeys.decryptSecretKey(String encryptedText, String secretKey)`
-
-Decrypts a Base64 ciphertext back into original.  
-Throws `AesEncryptionException` if decryption fails (wrong key, bad Base64, etc).
-
-### `AesEncryptionException`
-
-A custom exception for predictable error handling:
-
-```dart
-try {
-  ...
-} on AesEncryptionException catch (e) {
-  print(e.message);
-}
-```
-
----
-
-## 🧪 Testing
-
-Run unit tests to verify encryption/decryption consistency and error handling:
-
-```bash
-dart test
-```
-
-Example output:
-
-```
-✅ Test 1 passed: Round-trip encryption/decryption successful.
-✅ Test 2 passed: Wrong key correctly triggered exception.
-✅ Test 3 passed: Empty key correctly rejected.
-✅ Test 4 passed: Malformed Base64 input correctly rejected.
-+4: All tests passed!
-```
-
----
-
-## 📂 Example Project
-
-A ready-to-run example is included at [`example/main.dart`](example/main.dart):
-
-Run it using:
-
-```bash
-dart run example/main.dart
-```
-
-Expected output:
-
-```
---- ARM Encrypt Secret Example ---
-🔒 Encrypted (Base64): XzvB5oKj7G0b2m...
-🔓 Decrypted timestamp: 20251106193022
-⚠️ Expected error: Failed to decrypt secret key | Cause: FormatException: Invalid Base64 input
-```
-
----
-
-## 🧠 Notes
-
-- The AES key **must be exactly 16 characters** (128-bit).
-- Each encryption generates a unique 16-byte IV.
-- The IV is automatically prepended to the ciphertext before Base64 encoding.
-- The output format is compatible with **C# AES/CFB8** decryptors.
-
----
-
-### 💬 Feedback
-
-If you encounter any issue or want to contribute improvements,  
-create a pull request or open an issue in your team’s repository.
+TODO: Tell users more about the package: where to find more information, how to 
+contribute to the package, how to file issues, what response they can expect 
+from the package authors, and more.
