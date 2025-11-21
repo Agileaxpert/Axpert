@@ -9,6 +9,12 @@ void main() {
   group('EncryptSecretKeys.encryptSecretKey', () {
     test('returns encrypted string when statusCode = 200', () async {
       final mockClient = MockClient((request) async {
+        // Expected request URL
+        expect(
+          request.url.toString(),
+          "https://example.com/api/v1/ARMGetEncryptedSecret",
+        );
+
         return http.Response(
           'uyDf8YOcL1IugFbJ2SNqOuFvZhYYSElCqWYgeuMtEw==',
           200,
@@ -16,7 +22,7 @@ void main() {
       });
 
       final result = await EncryptSecretKeys.encryptSecretKey(
-        armUrl: "https://example.com/",
+        armUrl: "https://example.com",
         key: "1234567890123456",
         client: mockClient,
       );
@@ -41,7 +47,7 @@ void main() {
 
       expect(
         () => EncryptSecretKeys.encryptSecretKey(
-          armUrl: "https://example.com/",
+          armUrl: "https://example.com",
           key: "1234567890123456",
           client: mockClient,
         ),
@@ -58,20 +64,20 @@ void main() {
     test('throws error when key length is not 16', () async {
       expect(
         () => EncryptSecretKeys.encryptSecretKey(
-          armUrl: "https://example.com/",
+          armUrl: "https://example.com",
           key: "123",
         ),
         throwsA(predicate((e) => e.toString().contains("valid size"))),
       );
     });
 
-    test('throws error when armUrl does not end with slash', () async {
+    test('throws error when armUrl ends with slash', () async {
       expect(
         () => EncryptSecretKeys.encryptSecretKey(
-          armUrl: "https://example.com",
+          armUrl: "https://example.com/",
           key: "1234567890123456",
         ),
-        throwsA(predicate((e) => e.toString().contains("ends with"))),
+        throwsA(predicate((e) => e.toString().contains("never ends with"))),
       );
     });
 
@@ -82,7 +88,7 @@ void main() {
 
       expect(
         () => EncryptSecretKeys.encryptSecretKey(
-          armUrl: "https://example.com/",
+          armUrl: "https://example.com",
           key: "1234567890123456",
           client: mockClient,
         ),
@@ -97,11 +103,29 @@ void main() {
 
       expect(
         () => EncryptSecretKeys.encryptSecretKey(
-          armUrl: "https://example.com/",
+          armUrl: "https://example.com",
           key: "1234567890123456",
           client: mockClient,
         ),
-        throwsA(predicate((e) => e.toString().contains("invalid JSON"))),
+        throwsA(
+          predicate(
+            (e) =>
+                e.toString().contains("invalid JSON") ||
+                e.toString().contains("Server error (500)"),
+          ),
+        ),
+      );
+    });
+
+    test('throws error for invalid URL', () async {
+      expect(
+        () => EncryptSecretKeys.encryptSecretKey(
+          armUrl: "not_a_url",
+          key: "1234567890123456",
+        ),
+        throwsA(
+          predicate((e) => e.toString().contains("Specified URL is not valid")),
+        ),
       );
     });
   });

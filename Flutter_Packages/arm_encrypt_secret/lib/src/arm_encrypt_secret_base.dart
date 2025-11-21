@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class EncryptSecretKeys {
-  static const String _endpoint = "api/v1/ARMGetEncryptedSecret";
+  static const String _endpoint = "/api/v1/ARMGetEncryptedSecret";
 
   static Future<String> encryptSecretKey({
     required String armUrl,
@@ -22,8 +22,8 @@ class EncryptSecretKeys {
       throw Exception("Specified URL is not valid.");
     }
 
-    if (!armUrl.endsWith("/")) {
-      throw Exception("Make sure your ARM URL ends with '/' ");
+    if (armUrl.endsWith("/")) {
+      throw Exception("Make sure your ARM URL never ends with '/' ");
     }
 
     if (key.length != 16) {
