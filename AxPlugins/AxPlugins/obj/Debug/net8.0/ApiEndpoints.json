@@ -1,0 +1,200 @@
+[
+  {
+    "ContainingType": "AxPlugins.AppStatusController",
+    "Method": "ARMAppStatus",
+    "RelativePath": "api/v1/AppStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TraceFileController",
+    "Method": "GetTraceFile",
+    "RelativePath": "api/v1/GetTrace/{fileName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxDBController",
+    "Method": "AxDBTest",
+    "RelativePath": "AxDB/AxDBTest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AxPlugins.AxDBController",
+    "Method": "ExecuteSQL",
+    "RelativePath": "AxDB/ExecuteSQL",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sqlInput",
+        "Type": "AxPlugins.AxDB",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxiAIController",
+    "Method": "Ask",
+    "RelativePath": "AxiAI/ask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AxPlugins.ChatRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxRabbitMQController",
+    "Method": "AxDBTest",
+    "RelativePath": "AxRabbitMQ/AxRabbitMQTest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AxPlugins.AxRabbitMQController",
+    "Method": "PushToQueue",
+    "RelativePath": "AxRabbitMQ/PushToQueue",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rmqInput",
+        "Type": "AxPlugins.AxRabbitMQ",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxRedisController",
+    "Method": "StringGetWithAuth",
+    "RelativePath": "AxRedis/Auth/StringGet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "redis",
+        "Type": "AxPlugins.AxRedis",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxRedisController",
+    "Method": "StringSetWithAuth",
+    "RelativePath": "AxRedis/Auth/StringSet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "redis",
+        "Type": "AxPlugins.AxRedis",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxRedisController",
+    "Method": "AxRedisTest",
+    "RelativePath": "AxRedis/AxRedisTest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AxPlugins.AxRedisController",
+    "Method": "StringGetWithNoAuth",
+    "RelativePath": "AxRedis/StringGet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "redis",
+        "Type": "AxPlugins.AxRedis",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AxPlugins.AxRedisController",
+    "Method": "StringSetWithNoAuth",
+    "RelativePath": "AxRedis/StringSet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "redis",
+        "Type": "AxPlugins.AxRedis",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

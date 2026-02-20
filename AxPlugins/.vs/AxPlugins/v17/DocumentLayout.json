@@ -1,0 +1,108 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Codeset\\GIT\\AxPlugins\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|d:\\codeset\\git\\axplugins\\axplugins\\controllers\\axrediscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|solutionrelative:axplugins\\controllers\\axrediscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|d:\\codeset\\git\\axplugins\\axplugins\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|solutionrelative:axplugins\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|d:\\codeset\\git\\axplugins\\axplugins\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|solutionrelative:axplugins\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|d:\\codeset\\git\\axplugins\\axplugins\\controllers\\appstatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39650D0-0AB0-43FD-94C6-8C5A58511C0E}|AxPlugins\\AxPlugins.csproj|solutionrelative:axplugins\\controllers\\appstatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:254354193:0:{71f361cc-493f-47c0-923f-f2570b6f8618}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AxRedisController.cs",
+              "DocumentMoniker": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Controllers\\AxRedisController.cs",
+              "RelativeDocumentMoniker": "AxPlugins\\Controllers\\AxRedisController.cs",
+              "ToolTip": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Controllers\\AxRedisController.cs",
+              "RelativeToolTip": "AxPlugins\\Controllers\\AxRedisController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T10:22:51.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppStatusController.cs",
+              "DocumentMoniker": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Controllers\\AppStatusController.cs",
+              "RelativeDocumentMoniker": "AxPlugins\\Controllers\\AppStatusController.cs",
+              "ToolTip": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Controllers\\AppStatusController.cs",
+              "RelativeToolTip": "AxPlugins\\Controllers\\AppStatusController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T09:46:57.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Program.cs",
+              "RelativeDocumentMoniker": "AxPlugins\\Program.cs",
+              "ToolTip": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\Program.cs",
+              "RelativeToolTip": "AxPlugins\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T09:44:50.069Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\appsettings.json",
+              "RelativeDocumentMoniker": "AxPlugins\\appsettings.json",
+              "ToolTip": "D:\\Codeset\\GIT\\AxPlugins\\AxPlugins\\appsettings.json",
+              "RelativeToolTip": "AxPlugins\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-20T09:44:49.115Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
