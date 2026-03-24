@@ -14,3 +14,63 @@ A fully functional example of use of AxList API in Axpert is demonstrated here.
 	b) You can use postman or any other API testing tool to test the API.
 	c) You can also call the API from your mobile app or any other external app.
 	d) You can modify the filters, sorting, pagination parameters in the API JSON.txt file and test the API based on your ADS definition.
+
+
+Sample Javascript method synax:
+-------------------------------
+/**
+ * @description : Call GetDataFromAxList Asynchronously
+ * @Example
+ GetDataFromAxList({   
+    "adsNames": [
+            "employee_master_ads"
+    ],    
+    "refreshCache": true,
+    "sqlParams": {
+        "userparam_state": "Karnataka"
+    },
+    "keyField": "username",
+    "keyValue": "ALL",
+    "props" : {
+        "ADS" : true,
+        "CachePermissions": true,
+        "getallrecordscount": false, //Optional flag to get total record count without pagination. Will be helpful in scenarios where total record count of ADS is needed.        
+        "pageno": 1,
+        "pagesize": 100, //Pass 0 to fetch all records. Pass pagesize value to fetch records as per pagination.
+        "keyfield": "",
+        "keyvalue": "",
+        "AxClient_dateformat" : "", //Optional flag to pass client date format to convert date fields. Date fields in filters should be in same format as passed in this parameter
+        "select_columns" : ["username","sqlsrc"], //optional.add your select cols here
+        "aggregations" : {"total_sqlname": "count(*)"}, //optional. add your aggregation columns here with alias as key and aggregation sql as value
+        "groupby_columns" : ["username","sqlsrc"], //optional. add your group by cols here 
+        "sorting": [
+            {
+                "fldname": "employee_code",
+                "sort_order": "desc"
+            }
+        ],
+        "filters": [
+            {
+                "fldname": "gender",
+                "datatype": "TEXT",
+                "value": "Female",
+                "condition": "CONTAINS"
+            },
+            {
+                "fldname": "salary",
+                "datatype": "NUMERIC",
+                "from": "1000",
+                "to": "100000000"
+            },
+            {
+                "fldname": "department",
+                "datatype": "DROPDOWN",
+                "value": [
+                   "HR", "Finance", "Sales", "IT"
+                ]
+            }
+        ]
+    }
+}
+, function(data){ successlogics()}, function(data){ errorlogics()})
+ */
